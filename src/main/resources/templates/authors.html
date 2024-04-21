@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+</head>
+<body>
+<label> Authors
+    <select class="form-control" th:field="*{authors}" multiple="multiple">
+        <option th:each="part : ${authors}"
+                th:field="*{authors}"
+                th:value="${{part}}"
+                th:text="${part.name}">Part name</option>
+    </select>
+</label>
+</body>
+</html>
