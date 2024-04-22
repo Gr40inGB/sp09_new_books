@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class BookMapper {
-    private final String DELIMITER = ", ";
+    private final String DELIMITER = ",";
 
     private final BookRepository bookRepository;
     private final AuthorsRepository authorsRepository;
