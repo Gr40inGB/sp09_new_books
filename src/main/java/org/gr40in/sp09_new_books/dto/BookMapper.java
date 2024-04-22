@@ -24,6 +24,8 @@ public class BookMapper {
 
         BookDto bookDto = new BookDto();
 
+
+        bookDto.setId(book.getId());
         bookDto.setName(book.getName());
         bookDto.setAuthors(book.getAuthors()
                 .stream()
@@ -38,10 +40,11 @@ public class BookMapper {
 
     public Book mapToBook(BookDto bookDto) {
         Book book = new Book();
-        book.setName(book.getName());
-        book.setAuthors(authorsRepository
-                .findAllByNameIn(Arrays.stream
-                        (bookDto.getAuthors().split(DELIMITER)).toList()));
+        book.setId(bookDto.getId());
+        book.setName(bookDto.getName());
+        book.setAuthors(authorsRepository.findAllByIdIn(
+                Arrays.stream(bookDto.getAuthors().split(DELIMITER))
+                        .map(Long::parseLong).toList()));
         book.setGenres(Arrays.stream
                 (bookDto.getGenres().split(DELIMITER)).map(Genre::valueOf).toList());
         return book;

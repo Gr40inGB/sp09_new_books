@@ -7,28 +7,17 @@
 <body>
 <h3>Edit book</h3>
 <form th:action="@{/book/create}" th:object="${book}" th:method="post">
+    <label>Id
+        <input type="text" th:field="*{id}"/>
+    </label><br>
     <label>Name
         <input type="text" th:field="*{name}"/>
     </label><br>
-    <label> Authors
-        <select class="authors-class" th:field="*{authors}" multiple="multiple">
-            <option th:each="part : ${authors}"
-                    th:field="*{authors}"
-                    th:value="${{part}}"
-                    th:text="${part.name}"> authors
-            </option>
-        </select>
+    <label>Authors
+        <input type="text" th:field="*{authors}"/>
     </label><br>
-
     <label>Genres
-        <select class="genres-class" th:field="*{genres}" multiple="multiple">
-            <option
-                    th:each="part : ${genres}"
-                    th:field="*{genres}"
-                    th:value="${{part}}"
-                    th:text="${part.name}"> genres
-            </option>
-        </select>
+        <input type="text" th:field="*{genres}"/>
     </label><br>
 
     <h2 th:text="${message}">message</h2>
