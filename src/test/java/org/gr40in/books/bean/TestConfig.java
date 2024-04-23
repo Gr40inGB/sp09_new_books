@@ -1,5 +1,6 @@
 package org.gr40in.books.bean;
 
+import jakarta.persistence.EntityManager;
 import org.gr40in.books.dao.Book;
 import org.gr40in.books.dto.BookMapper;
 import org.gr40in.books.repository.AuthorsRepository;
@@ -13,6 +14,9 @@ import org.springframework.context.annotation.Bean;
 public class TestConfig {
     @MockBean
     private Book auto;
+
+//    @MockBean
+//    private EntityManager entityManager;
 
     @MockBean
     private BookRepository bookRepository;

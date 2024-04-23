@@ -7,14 +7,20 @@ import org.gr40in.books.dao.Book;
 import org.gr40in.books.dao.Genre;
 import org.gr40in.books.dto.BookDto;
 import org.gr40in.books.repository.BookRepository;
+import org.junit.ClassRule;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
@@ -41,13 +47,31 @@ class BookControllerApiTest extends JUnitSpringBootBase {
 
     @Autowired
     BookRepository bookRepository;
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+//    @Autowired
+//    JdbcTemplate jdbcTemplate;
 
-    @Container
-    @ServiceConnection
-    public static PostgreSQLContainer postgreSQLContainer =
-            new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+//    @ClassRule
+//    public static PostgreSQLContainer postgres = new PostgreSQLContainer<>("postgres")
+//            .withDatabaseName("test_book")
+//            .withUsername("it_user")
+//            .withPassword("it_pass");
+////            .withInitScript("sql/init_postgres.sql");
+
+//    static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+//        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
+//            TestPropertyValues.of(
+//                    "spring.data.postgres.host=" + postgres.getContainerIpAddress(),
+//                    "spring.data.postgres.port=" + postgres.getMappedPort(5432),
+//                    "spring.data.postgres.username=" + postgres.getUsername(),
+//                    "spring.data.postgres.password=" + postgres.getPassword()
+//            ).applyTo(configurableApplicationContext.getEnvironment());
+//        }
+//    }
+//
+//    @Container
+//    @ServiceConnection
+//    public static PostgreSQLContainer postgreSQLContainer =
+//            new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
 
     @BeforeEach
     void setUp() {
@@ -57,7 +81,8 @@ class BookControllerApiTest extends JUnitSpringBootBase {
 
     @Test
     void getBooks() {
-        bookRepository.saveAll(List.of(
+
+        var bookList = List.of(
                 Book.builder()
                         .name("Some boring book")
                         .authors(List.of(
@@ -72,8 +97,9 @@ class BookControllerApiTest extends JUnitSpringBootBase {
                         ))
                         .genres(List.of(Genre.SCY_FY))
                         .build()
-        ));
+        );
 
+        Mockito.when(bookRepository.findAll()).thenReturn(bookList);
 
         List<Book> books = bookRepository.findAll();
 
