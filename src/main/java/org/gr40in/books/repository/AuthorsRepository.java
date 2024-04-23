@@ -1,11 +1,9 @@
-package org.gr40in.sp09_new_books.repository;
+package org.gr40in.books.repository;
 
-import org.gr40in.sp09_new_books.dao.Author;
-import org.gr40in.sp09_new_books.dao.Book;
+import org.gr40in.books.dao.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.LongSummaryStatistics;
 
 public interface AuthorsRepository extends JpaRepository<Author, Long> {
     Author findByName(String name);

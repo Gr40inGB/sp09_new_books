@@ -1,4 +1,4 @@
-package org.gr40in.sp09_new_books;
+package org.gr40in.books;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

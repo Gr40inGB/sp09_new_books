@@ -1,17 +1,13 @@
-package org.gr40in.sp09_new_books.controller;
+package org.gr40in.books.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.gr40in.sp09_new_books.dao.Genre;
-import org.gr40in.sp09_new_books.dto.BookDto;
-import org.gr40in.sp09_new_books.service.AuthorsService;
-import org.gr40in.sp09_new_books.service.BookService;
+import org.gr40in.books.dto.BookDto;
+import org.gr40in.books.service.AuthorsService;
+import org.gr40in.books.service.BookService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -21,13 +17,6 @@ public class BookControllerApi {
 
     private final BookService bookService;
     private final AuthorsService authorsService;
-
-//    @GetMapping("create")
-//    public ResponseEntity<BookDto> createBook(@RequestBody BookDto bookDto) {
-//        bookService.createBook(bookDto);
-//        return "book_create";
-//    }
-
 
     @RequestMapping()
     public ResponseEntity<List<BookDto>> getBooks() {

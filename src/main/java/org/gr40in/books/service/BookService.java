@@ -1,15 +1,16 @@
-package org.gr40in.sp09_new_books.service;
+package org.gr40in.books.service;
 
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import net.datafaker.Faker;
-import org.gr40in.sp09_new_books.dao.Author;
-import org.gr40in.sp09_new_books.dao.Book;
-import org.gr40in.sp09_new_books.dao.Genre;
-import org.gr40in.sp09_new_books.dto.BookDto;
-import org.gr40in.sp09_new_books.dto.BookMapper;
-import org.gr40in.sp09_new_books.repository.AuthorsRepository;
-import org.gr40in.sp09_new_books.repository.BookRepository;
-import org.springframework.context.annotation.Bean;
+import org.gr40in.books.dao.Author;
+import org.gr40in.books.dao.Book;
+import org.gr40in.books.dao.Genre;
+import org.gr40in.books.dto.BookDto;
+import org.gr40in.books.dto.BookMapper;
+import org.gr40in.books.repository.AuthorsRepository;
+import org.gr40in.books.repository.BookRepository;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
@@ -22,6 +23,7 @@ import java.util.Random;
 
 @RequiredArgsConstructor
 @Service
+@Builder
 public class BookService {
     private final BookRepository bookRepository;
     private final AuthorsRepository authorsRepository;
@@ -41,6 +43,7 @@ public class BookService {
     }
 
     public BookDto createBook(BookDto book) {
+        book.setId(null);
         Book saved = bookRepository.save(bookMapper.mapToBook(book));
         return bookMapper.mapToDto(saved);
     }
@@ -61,34 +64,35 @@ public class BookService {
         return bookMapper.mapToDto(book);
     }
 
-    @EventListener(ContextRefreshedEvent.class)
-    @Order(2)
-    private void generateBooks() {
-        if (bookRepository.findAll().isEmpty()) {
-            Random random = new Random();
-            Faker faker = new Faker();
-            for (int i = 0; i < 20; i++)
-                authorsRepository.save(Author.builder()
-                        .name(faker.book().author())
-                        .build());
-            List<Author> authors = authorsRepository.findAll();
-            for (int i = 0; i < 30; i++) {
-                bookRepository.save(Book.builder()
-                        .name(faker.book().title())
-                        .authors(random.longs(random.nextInt(1,3), 1, 19)
-                                .mapToObj(authorsRepository::findById)
-                                .map(Optional::get)
-                                .toList())
-                        .genres(random.ints(2, 1, 4)
-                                .mapToObj(j -> Genre.values()[j])
-                                .toList())
-                        .build());
-
-
-            }
-
-
-        }
-
-    }
+//    @EventListener(ContextRefreshedEvent.class)
+//    @Order(2)
+//
+//    private void generateBooks() {
+//        if (bookRepository.findAll().isEmpty()) {
+//            Random random = new Random();
+//            Faker faker = new Faker();
+//            for (int i = 0; i < 20; i++)
+//                authorsRepository.save(Author.builder()
+//                        .name(faker.book().author())
+//                        .build());
+//            List<Author> authors = authorsRepository.findAll();
+//            for (int i = 0; i < 30; i++) {
+//                bookRepository.save(Book.builder()
+//                        .name(faker.book().title())
+//                        .authors(random.longs(random.nextInt(1,3), 1, 19)
+//                                .mapToObj(authorsRepository::findById)
+//                                .map(Optional::get)
+//                                .toList())
+//                        .genres(random.ints(2, 1, 4)
+//                                .mapToObj(j -> Genre.values()[j])
+//                                .toList())
+//                        .build());
+//
+//
+//            }
+//
+//
+//        }
+//
+//    }
 }

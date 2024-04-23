@@ -1,4 +1,4 @@
-package org.gr40in.sp09_new_books.dao;
+package org.gr40in.books.dao;
 
 
 public enum Genre {

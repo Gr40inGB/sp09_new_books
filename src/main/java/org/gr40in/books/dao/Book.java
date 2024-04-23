@@ -1,4 +1,4 @@
-package org.gr40in.sp09_new_books.dao;
+package org.gr40in.books.dao;
 
 
 import jakarta.persistence.*;
@@ -14,7 +14,7 @@ import java.util.List;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = Genre.class)

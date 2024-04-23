@@ -1,15 +1,11 @@
-package org.gr40in.sp09_new_books.controller;
+package org.gr40in.books.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.gr40in.sp09_new_books.dao.Author;
-import org.gr40in.sp09_new_books.service.AuthorsService;
-import org.springframework.beans.factory.annotation.Value;
+import org.gr40in.books.dao.Author;
+import org.gr40in.books.service.AuthorsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("author")

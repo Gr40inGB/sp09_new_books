@@ -1,11 +1,11 @@
-package org.gr40in.sp09_new_books.dto;
+package org.gr40in.books.dto;
 
 import lombok.RequiredArgsConstructor;
-import org.gr40in.sp09_new_books.dao.Author;
-import org.gr40in.sp09_new_books.dao.Book;
-import org.gr40in.sp09_new_books.dao.Genre;
-import org.gr40in.sp09_new_books.repository.AuthorsRepository;
-import org.gr40in.sp09_new_books.repository.BookRepository;
+import org.gr40in.books.dao.Author;
+import org.gr40in.books.dao.Book;
+import org.gr40in.books.dao.Genre;
+import org.gr40in.books.repository.AuthorsRepository;
+import org.gr40in.books.repository.BookRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;

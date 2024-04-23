@@ -1,8 +1,8 @@
-package org.gr40in.sp09_new_books.service;
+package org.gr40in.books.service;
 
 import lombok.RequiredArgsConstructor;
-import org.gr40in.sp09_new_books.dao.Author;
-import org.gr40in.sp09_new_books.repository.AuthorsRepository;
+import org.gr40in.books.dao.Author;
+import org.gr40in.books.repository.AuthorsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
